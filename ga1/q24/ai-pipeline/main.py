@@ -26,8 +26,8 @@ app.add_middleware(
 # Initialize OpenAI client with custom base URL
 # Initialize OpenAI client with custom base URL
 client = OpenAI(
-    api_key=os.getenv('AIPIPE_TOKEN') or os.getenv('AIPROXY_TOKEN'),
-    base_url=os.getenv('AIPIPE_BASE_URL') or "https://aipipe.org/openai/v1"
+    api_key=os.getenv('eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjMwMDM3NTZAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.ZDq34qobOlVytVxsS6mxprtpXTeaxxCS4ApCyCHOQzY') 
+    base_url=os.getenv('https://aipipe.org/openai/v1') 
 )
 
 # ==================== DATA MODELS ====================
@@ -327,4 +327,5 @@ async def run_pipeline(request: PipelineRequest):
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv('PORT', 8000))
+
     uvicorn.run(app, host="0.0.0.0", port=port)
