@@ -71,3 +71,7 @@ def get_documents():
         'total': len(search_engine.documents),
         'documents': search_engine.documents[:10]  # First 10
     })
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
+
