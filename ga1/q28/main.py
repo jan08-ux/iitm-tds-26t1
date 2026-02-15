@@ -39,7 +39,8 @@ else:
 if not API_KEY:
     raise RuntimeError("API key not configured. Set OPENAI_API_KEY or AIPROXY_TOKEN.")
 
-MODEL_NAME = "gpt-4.1-mini"
+MODEL_NAME = "gpt-4o-mini"
+
 
 
 class PromptRequest(BaseModel):
@@ -140,3 +141,4 @@ async def root():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8004)
+
