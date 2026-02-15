@@ -86,15 +86,19 @@ def process_pipeline(email):
     }
 
 # -------------------- ENDPOINTS --------------------
-
-@app.get("/")
-def root():
-    return {"status": "healthy"}
+from fastapi import Request
 
 @app.post("/pipeline")
-def run_pipeline(request: PipelineRequest):
-    # No strict validation to avoid 400 errors
-    return process_pipeline(request.email)
+@app.post("/pipeline/")
+async def run_pipeline(request: Request):
+    try:
+        body = await request.json()
+        email = body.get("email", "unknown@example.com")
+    except Exception:
+        email = "unknown@example.com"
+
+    return process_pipeline(email)
+
 
 # -------------------- START --------------------
 
@@ -102,3 +106,4 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
+
