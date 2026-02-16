@@ -54,9 +54,11 @@ async def stream_llm_response(prompt: str):
     """
 
     # Immediate flush chunk (reduces first-token latency issues)
+    # Immediate flush chunk (reduces first-token latency issues)
     padding = " " * 2048
     yield f'data: {json.dumps({"choices":[{"delta":{"content":""}}],"padding":padding})}\n\n'
     await asyncio.sleep(0)
+
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
@@ -76,7 +78,7 @@ async def stream_llm_response(prompt: str):
             {"role": "user", "content": enforced_prompt},
         ],
         "stream": True,
-        "max_tokens": 1200,
+        "max_tokens": 800,
         "temperature": 0.7,
     }
 
@@ -141,4 +143,5 @@ async def root():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8004)
+
 
